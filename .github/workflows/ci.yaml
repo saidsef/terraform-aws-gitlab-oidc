@@ -37,7 +37,7 @@ jobs:
         uses: aquasecurity/tfsec-action@v1.0.2
 
   caller-identity-check:
-    if: ${{ gitlab.event_name == 'pull_request' }}
+    if: ${{ github.event_name == 'pull_request' }}
     name: Return the IAM user
     needs: [validate, tfsec]
     permissions:
@@ -49,20 +49,20 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-region: ${{ secrets.AWS_REGION }}
-        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/gitlab-runner
+        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-runner
     - run: |
         aws sts get-caller-identity
 
   auto-approve:
-    if: ${{ gitlab.event_name == 'pull_request' }}
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     needs: [validate, tfsec, caller-identity-check]
     steps:
     - name: Auto Approve PR
-      uses: actions/gitlab-script@v6
+      uses: actions/github-script@v6
       with:
        script: |
-        gitlab.rest.pulls.createReview({
+        github.rest.pulls.createReview({
           owner: context.repo.owner,
           repo: context.repo.repo,
           pull_number: context.issue.number,
