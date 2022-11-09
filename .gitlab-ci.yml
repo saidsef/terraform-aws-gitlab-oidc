@@ -1,0 +1,49 @@
+image:
+  name: amazon/aws-cli:latest
+  entrypoint:
+    - "/usr/bin/env"
+
+variables:
+  TF_LOG_PATH: ./terraform.log
+  TF_DATA_DIR: ./.terraform
+  ROLE_ARN: "arn:aws:iam::$SECRET_AWS_ACCOUNT_ID:role/gitlab-runner"
+  AWS_REGION: "$SECRET_AWS_REGION"
+
+stages:
+ - validate
+ - aws-test
+
+.assume-role:
+  before_script:
+    - >
+      STS=($(aws sts assume-role-with-web-identity
+      --role-arn $ROLE_ARN
+      --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+      --web-identity-token $CI_JOB_JWT_V2
+      --duration-seconds 3600
+      --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
+      --output text))
+    - export AWS_ACCESS_KEY_ID="${STS[0]}"
+    - export AWS_SECRET_ACCESS_KEY="${STS[1]}"
+    - export AWS_SESSION_TOKEN="${STS[2]}"
+
+validate:
+  stage: validate
+  needs: []
+  image:
+    name: hashicorp/terraform:1.1.9
+    entrypoint:
+      - "/usr/bin/env"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  interruptible: true
+  script:
+    - terraform init -backend=false
+    - terraform fmt -check -recursive
+    - terraform validate
+
+aws:
+  stage: aws-test
+  needs: [validate]
+  extends: .assume-role
+  script:
+    - aws sts get-caller-identity
