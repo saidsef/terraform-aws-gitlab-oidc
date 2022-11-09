@@ -1,4 +1,4 @@
-# Terraform AWS GitLab OIDC Provider [![CI](https://gitlab.com/saidsef/terraform-aws-gitlab-oidc/actions/workflows/ci.yaml/badge.svg)](#deployment) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE.md)
+# Terraform AWS GitLab OIDC Provider [![CI](https://github.com/saidsef/terraform-aws-gitlab-oidc/actions/workflows/ci.yaml/badge.svg)](#deployment) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE.md)
 
 This Terraform module enables you to configure GitLab Actions as an AWS IAM OIDC identity provider in AWS, which enables GitLab Actions to access resources within an AWS account(s) without requiring long-lived credentials to be stored as GitLab secrets.
 
