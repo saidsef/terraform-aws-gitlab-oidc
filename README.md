@@ -37,6 +37,6 @@ Our latest and greatest source of `terraform-aws-gitlab-oidc` can be found on [G
 
 ## Contributing
 
-We would :heart: you to contribute by making a [pull request](https://gitlab.com/saidsef/terraform-aws-gitlab-oidc/pulls).
+We would :heart: you to contribute by making a [pull request](https://github.com/saidsef/terraform-aws-gitlab-oidc/pulls).
 
 Please read the official [Contribution Guide](./CONTRIBUTING.md) for more information on how you can contribute.
