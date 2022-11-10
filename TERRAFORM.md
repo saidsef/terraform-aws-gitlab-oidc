@@ -10,8 +10,8 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.0 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | ~> 4.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.38.0 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
 
 ## Modules
 
@@ -42,8 +42,6 @@ No modules.
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Force detachment of policies attached to the IAM role | `string` | `false` | no |
 | <a name="input_gitlab_organisation"></a> [gitlab\_organisation](#input\_gitlab\_organisation) | GitLab organisation name | `string` | n/a | yes |
 | <a name="input_gitlab_repositories"></a> [gitlab\_repositories](#input\_gitlab\_repositories) | List of GitLab repository name(s) and branche names or patterns | <pre>list(object({<br>    name     = string<br>    branches = list(string)<br>  }))</pre> | <pre>[<br>  {<br>    "branches": null,<br>    "name": null<br>  }<br>]</pre> | no |
-| <a name="input_iam_policy_name"></a> [iam\_policy\_name](#input\_iam\_policy\_name) | Name of the IAM policy to be assumed by GitLab. | `string` | `"gitlab"` | no |
-| <a name="input_iam_policy_path"></a> [iam\_policy\_path](#input\_iam\_policy\_path) | Path to the IAM policy | `string` | `"/"` | no |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name) | Name of the IAM role | `string` | `"gitlab-runner"` | no |
 | <a name="input_iam_role_path"></a> [iam\_role\_path](#input\_iam\_role\_path) | Path to the IAM role | `string` | `"/"` | no |
 | <a name="input_iam_role_permissions_boundary"></a> [iam\_role\_permissions\_boundary](#input\_iam\_role\_permissions\_boundary) | ARN of the permissions boundary to be used by the IAM role | `string` | `""` | no |
