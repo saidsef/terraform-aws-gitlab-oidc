@@ -10,8 +10,6 @@ gitlab_repositories = [
     "name" : null
   }
 ]
-iam_policy_name               = "gitlab"
-iam_policy_path               = "/"
 iam_role_name                 = "gitlab-runner"
 iam_role_path                 = "/"
 iam_role_permissions_boundary = ""
