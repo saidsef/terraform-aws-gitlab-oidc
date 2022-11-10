@@ -16,14 +16,14 @@ resource "aws_iam_role" "role" {
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
-  count = tobool(var.enabled) && var.attach_admin_policy ? 1 : 0
+  count = tobool(var.enabled) && tobool(var.attach_admin_policy) ? 1 : 0
 
   policy_arn = format("arn:%s:iam::aws:policy/AdministratorAccess", data.aws_partition.current.partition)
   role       = aws_iam_role.role[0].id
 }
 
 resource "aws_iam_role_policy_attachment" "read_only" {
-  count = tobool(var.enabled) && var.attach_read_only_policy ? 1 : 0
+  count = tobool(var.enabled) && tobool(var.attach_read_only_policy) ? 1 : 0
 
   policy_arn = format("arn:%s:iam::aws:policy/ReadOnlyAccess", data.aws_partition.current.partition)
   role       = aws_iam_role.role[0].id
@@ -37,7 +37,7 @@ resource "aws_iam_role_policy_attachment" "custom" {
 }
 
 resource "aws_iam_openid_connect_provider" "provider" {
-  count          = tobool(var.enabled) && var.create_oidc_provider ? 1 : 0
+  count          = tobool(var.enabled) && tobool(var.create_oidc_provider) ? 1 : 0
   client_id_list = [format("https://%s", var.url)]
 
   tags            = var.tags

@@ -12,8 +12,6 @@ module "gitlab_oidc" {
   force_detach_policies         = false
   gitlab_organisation           = var.gitlab_organisation
   gitlab_repositories           = [{ name = "terraform-aws-gitlab-oidc", branches = ["main", "pr-*", "*pull*", "*"] }]
-  iam_policy_name               = "gitlab"
-  iam_policy_path               = "/"
   iam_role_name                 = "gitlab-runner"
   iam_role_path                 = "/"
   iam_role_permissions_boundary = ""
