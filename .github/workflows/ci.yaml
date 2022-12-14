@@ -41,11 +41,11 @@ jobs:
         cd exmaples/complete
         terraform init -backend=false -upgrade -reconfigure
         terraform validate
-    # - name: Exmaple Remote Validate
-    #   run: |
-    #     cd exmaples/remote
-    #     terraform init -backend=false -upgrade -reconfigure
-    #     terraform validate
+    - name: Exmaple Remote Validate
+      run: |
+        cd exmaples/remote
+        terraform init -backend=false -upgrade -reconfigure
+        terraform validate
 
   tflint:
     name: tflint
