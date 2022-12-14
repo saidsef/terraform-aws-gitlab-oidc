@@ -7,7 +7,7 @@ This Terraform module enables you to configure GitLab Actions as an AWS IAM OIDC
 
 - AWS Account(s) and credentials
 - GitLab repository
-- Terraform >= 1.1.x
+- Terraform >= 1.0.x
 - Profit?
 
 ## Deployment / Usage
