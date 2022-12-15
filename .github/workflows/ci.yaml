@@ -12,6 +12,8 @@ jobs:
   validate:
     name: Validate
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     strategy:
       fail-fast: true
       matrix:
@@ -50,6 +52,8 @@ jobs:
   tflint:
     name: tflint
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     needs: [validate]
     steps:
       - name: Checkout code
@@ -62,7 +66,7 @@ jobs:
       - uses: terraform-linters/setup-tflint@v2
         name: Setup TFLint
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ github.token }}
           tflint_version: latest
       - name: Run TFLint
         run: |
@@ -72,6 +76,8 @@ jobs:
   tfsec:
     name: tfsec
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     needs: [validate]
     steps:
       - name: Checkout code
@@ -83,13 +89,13 @@ jobs:
           version: "latest"
 
   caller-identity-check:
-    if: ${{ github.event_name == 'pull_request' }}
+    if: contains(github.event_name, 'pull_request')
+    runs-on: ubuntu-latest
     name: Return the IAM user
     needs: [validate, tflint, tfsec]
     permissions:
       contents: read
       id-token: write
-    runs-on: ubuntu-latest
     steps:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -100,13 +106,14 @@ jobs:
         aws sts get-caller-identity
 
   auto-approve:
-    if: ${{ github.event_name == 'pull_request' }}
+    if: contains(github.event_name, 'pull_request')
     runs-on: ubuntu-latest
     needs: [validate, tfsec, caller-identity-check]
     steps:
     - name: Auto Approve PR
       uses: actions/github-script@v6
       with:
+       github-token: ${{ github.token }}
        script: |
         github.rest.pulls.createReview({
           owner: context.repo.owner,
