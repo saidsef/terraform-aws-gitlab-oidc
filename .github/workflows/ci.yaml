@@ -63,7 +63,7 @@ jobs:
         with:
           path: ~/.tflint.d/plugins
           key: ${{ runner.os }}-tflint
-      - uses: terraform-linters/setup-tflint@v2
+      - uses: terraform-linters/setup-tflint@v3
         name: Setup TFLint
         with:
           github_token: ${{ github.token }}
