@@ -3,10 +3,7 @@ repos:
     rev: v1.77.0
     hooks:
       - id: terraform_fmt
-      - id: terraform_docs
-        args:
-          - "--hook-config=--path-to-file=TERRAFORM.md"
-      - id: terraform_tfsec
+      - id: terraform_tflint
       - id: terraform_validate
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
@@ -14,4 +11,6 @@ repos:
       - id: check-case-conflict
       - id: check-merge-conflict
       - id: check-vcs-permalinks
+      - id: check-yaml
       - id: end-of-file-fixer
+      - id: trailing-whitespace

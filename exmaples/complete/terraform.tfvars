@@ -5,9 +5,8 @@ enabled                 = true
 force_detach_policies   = false
 gitlab_organisation     = "saidsef"
 gitlab_repositories = [
-  {
-    "branches" : null,
-    "name" : null
+  { name     = "terraform-aws-gitlab-oidc",
+    branches = ["main", "pr-*", "*pull*", "*"]
   }
 ]
 iam_role_name                 = "gitlab-runner"

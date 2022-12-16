@@ -11,7 +11,7 @@ module "gitlab_oidc" {
   create_oidc_provider          = true
   enabled                       = true
   force_detach_policies         = false
-  gitlab_organisation           = var.gitlab_organisation
+  gitlab_organisation           = "saidsef"
   gitlab_repositories           = [{ name = "terraform-aws-gitlab-oidc", branches = ["main", "pr-*", "*pull*", "*"] }]
   iam_role_name                 = "gitlab-runner"
   iam_role_path                 = "/"
