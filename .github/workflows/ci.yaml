@@ -10,8 +10,19 @@ on:
   workflow_dispatch:
 
 jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v3
+    - uses: terraform-linters/setup-tflint@v3
+    - uses: pre-commit/action@v3.0.0
+      with:
+        extra_args: "-a"
+
   validate:
     name: Validate
+    needs: [pre-commit]
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -50,30 +61,6 @@ jobs:
         terraform init -backend=false -upgrade -reconfigure
         terraform validate
 
-  tflint:
-    name: tflint
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    needs: [validate]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - uses: actions/cache@v3
-        name: Cache plugin dir
-        with:
-          path: ~/.tflint.d/plugins
-          key: ${{ runner.os }}-tflint
-      - uses: terraform-linters/setup-tflint@v3
-        name: Setup TFLint
-        with:
-          github_token: ${{ github.token }}
-          tflint_version: latest
-      - name: Run TFLint
-        run: |
-          tflint --init
-          tflint -f compact
-
   tfsec:
     name: tfsec
     runs-on: ubuntu-latest
@@ -81,19 +68,19 @@ jobs:
       pull-requests: write
     needs: [validate]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: tfsec
-        uses: aquasecurity/tfsec-action@v1.0.2
-        with:
-          additional_args: "--force-all-dirs --concise-output --code-theme=dark"
-          version: "latest"
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: tfsec
+      uses: aquasecurity/tfsec-action@v1.0.2
+      with:
+        additional_args: "--force-all-dirs --concise-output --code-theme=dark"
+        version: "latest"
 
   caller-identity-check:
     if: contains(github.event_name, 'pull_request')
     runs-on: ubuntu-latest
     name: Return the IAM user
-    needs: [validate, tflint, tfsec]
+    needs: [validate, tfsec]
     permissions:
       contents: read
       id-token: write
