@@ -10,14 +10,14 @@ output "role_arn" {
   description = "AWS IAM role ARN"
 }
 
-output "repository" {
+output "repositories" {
   value       = local.repositories_branches
   sensitive   = false
-  description = "GitLab repository and branches"
+  description = "List of GitLab repositories and branches"
 }
 
 output "thumbprint" {
   value       = [for fingerprint in data.tls_certificate.provider.certificates : fingerprint.sha1_fingerprint]
   sensitive   = false
-  description = "GitLab certificates thumbprint"
+  description = "GitLab certificates thumbprints"
 }
