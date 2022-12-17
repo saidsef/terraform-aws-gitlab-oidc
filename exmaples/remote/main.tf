@@ -6,13 +6,16 @@ module "gitlab_oidc" {
   source  = "saidsef/gitlab-oidc/aws"
   version = ">= 1"
 
-  attach_admin_policy           = true
-  attach_read_only_policy       = true
-  create_oidc_provider          = true
-  enabled                       = true
-  force_detach_policies         = false
-  gitlab_organisation           = "saidsef"
-  gitlab_repositories           = [{ name = "terraform-aws-gitlab-oidc", branches = ["main", "pr-*", "*pull*", "*"] }]
+  attach_admin_policy     = true
+  attach_read_only_policy = true
+  create_oidc_provider    = true
+  enabled                 = true
+  force_detach_policies   = false
+  gitlab_organisation     = "saidsef"
+  gitlab_repositories = [{
+    name     = "terraform-aws-gitlab-oidc",
+    branches = ["main", "pr-*", "*pull*", "*"]
+  }]
   iam_role_name                 = "gitlab-runner"
   iam_role_path                 = "/"
   iam_role_permissions_boundary = ""

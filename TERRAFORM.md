@@ -54,7 +54,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_repository"></a> [repository](#output\_repository) | GitLab repository and branches |
+| <a name="output_repositories"></a> [repositories](#output\_repositories) | List of GitLab repositories and branches |
 | <a name="output_role_arn"></a> [role\_arn](#output\_role\_arn) | AWS IAM role ARN |
 | <a name="output_role_id"></a> [role\_id](#output\_role\_id) | AWS IAM role ID |
-| <a name="output_thumbprint"></a> [thumbprint](#output\_thumbprint) | GitLab certificates thumbprint |
+| <a name="output_thumbprint"></a> [thumbprint](#output\_thumbprint) | GitLab certificates thumbprints |
