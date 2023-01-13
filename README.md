@@ -8,6 +8,7 @@ This Terraform module enables you to configure GitLab Runners as an AWS IAM OIDC
 - AWS Account(s) and credentials
 - GitLab repository
 - Terraform >= 1.x
+- ...
 - Profit?
 
 ## Deployment / Usage
@@ -37,7 +38,9 @@ Please see [TERRAFORM.md](./TERRAFORM.md)
 
 ## GitLab Runner
 
-Retrieve temporary credentials via [GitLab Runner](https://github.com/saidsef/terraform-aws-gitlab-oidc/blob/2b26d4f844a0ed52b10c72100e744d38965ab748/.gitlab-ci.yml#L16-L28)
+Retrieve temporary credentials via [GitLab Runner](https://github.com/saidsef/terraform-aws-gitlab-oidc/blob/a9f7cf02fd5789b41f2aca5978c752b8fc843977/.gitlab-ci.yml#L16-L28)
+
+https://github.com/saidsef/terraform-aws-gitlab-oidc/blob/a9f7cf02fd5789b41f2aca5978c752b8fc843977/.gitlab-ci.yml#L16-L28
 
 ## Source
 
