@@ -63,6 +63,7 @@ jobs:
 
   tfsec:
     name: tfsec
+    if: contains(github.event_name, 'pull_request')
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -71,10 +72,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: tfsec
-      uses: aquasecurity/tfsec-action@v1.0.2
+      id: tfsec
+      uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
       with:
-        additional_args: "--force-all-dirs --concise-output --code-theme=dark"
-        version: "latest"
+        github_token: ${{ github.token }}
+        tfsec_args: "--force-all-dirs --concise-output --code-theme=dark --no-color"
+        tfsec_version: "latest"
 
   caller-identity-check:
     if: contains(github.event_name, 'pull_request')
