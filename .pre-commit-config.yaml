@@ -35,7 +35,3 @@ repos:
     - id: end-of-file-fixer
     - id: mixed-line-ending
     - id: trailing-whitespace
-  - repo: https://github.com/zricethezav/gitleaks
-    rev: v8.15.2
-    hooks:
-      - id: gitleaks
