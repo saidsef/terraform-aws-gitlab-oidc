@@ -18,6 +18,7 @@ stages:
     - >
       STS=($(aws sts assume-role-with-web-identity
       --role-arn $ROLE_ARN
+      --region $AWS_REGION
       --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
       --web-identity-token $CI_JOB_JWT_V2
       --duration-seconds 3600
