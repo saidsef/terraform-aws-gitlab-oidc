@@ -93,6 +93,7 @@ jobs:
       with:
         aws-region: ${{ secrets.AWS_REGION }}
         role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions
+        role-session-name: ${{ github.event.repository.name }}-${{ github.ref_type }}
     - run: |
         aws sts get-caller-identity
 
