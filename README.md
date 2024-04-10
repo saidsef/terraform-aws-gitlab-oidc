@@ -8,6 +8,7 @@ This Terraform module enables you to configure GitLab Runners as an AWS IAM OIDC
 - AWS Account(s) and credentials
 - GitLab repository
 - Terraform >= 1.x
+- ...
 - Profit?
 
 ## Deployment / Usage
