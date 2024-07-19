@@ -36,13 +36,15 @@ variable "gitlab_organisation" {
 variable "gitlab_repositories" {
   type = list(object({
     name     = string
-    branches = list(string)
+    refs     = list(string)
+    ref_type = string
   }))
   default = [{
-    branches = null
+    refs     = null
     name     = null
+    ref_type = null
   }]
-  description = "List of GitLab repository name(s) and branche names or patterns"
+  description = "List of GitLab repository name(s) and refs names or patterns"
 }
 
 variable "iam_role_name" {
