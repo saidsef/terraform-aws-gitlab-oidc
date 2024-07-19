@@ -1,11 +1,12 @@
 data "aws_partition" "current" {}
 
 locals {
-  repositories_branches = flatten([
+  repositories_refs = flatten([
     for repo in var.gitlab_repositories : [
-      for branch in repo.branches : {
-        branch = branch
-        name   = repo.name
+      for ref in repo.refs : {
+        ref      = ref
+        name     = repo.name
+        ref_type = repo.ref_type
       }
     ]
   ])
@@ -18,7 +19,7 @@ data "aws_iam_policy_document" "assume_role" {
 
     condition {
       test     = "ForAnyValue:StringLike"
-      values   = [for repo in local.repositories_branches : format("project_path:%s/%s:ref_type:branch:ref:%s", var.gitlab_organisation, repo.name, repo.branch)]
+      values   = [for repo in local.repositories_refs : format("project_path:%s/%s:ref_type:%s:ref:%s", var.gitlab_organisation, repo.name, repo.ref_type, repo.ref)]
       variable = format("%s:sub", var.url)
     }
 

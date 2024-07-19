@@ -11,9 +11,9 @@ output "role_arn" {
 }
 
 output "repositories" {
-  value       = local.repositories_branches
+  value       = local.repositories_refs
   sensitive   = false
-  description = "List of GitLab repositories and branches"
+  description = "List of GitLab repositories and refs"
 }
 
 output "thumbprint" {
