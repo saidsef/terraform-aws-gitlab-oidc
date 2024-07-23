@@ -13,7 +13,7 @@ jobs:
   validate:
     uses: saidsef/saidsef/.github/workflows/tf-validate.yaml@main
     with:
-      start-version: '3'
+      start-version: '0'
       end-version: '8'
 
   tfsec:
