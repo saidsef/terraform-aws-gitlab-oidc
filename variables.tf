@@ -39,11 +39,13 @@ variable "gitlab_repositories" {
     refs     = list(string)
     ref_type = string
   }))
-  default = [{
-    refs     = null
-    name     = null
-    ref_type = null
-  }]
+  default = [
+    {
+      name     = ""
+      refs     = []
+      ref_type = ""
+    }
+  ]
   description = "List of GitLab repository name(s) and refs names or patterns"
 }
 
