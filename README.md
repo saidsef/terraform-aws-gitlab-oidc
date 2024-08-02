@@ -24,10 +24,18 @@ module "gitlab_oidc" {
 
   attach_read_only_policy = true
   gitlab_organisation     = "saidsef"
-  gitlab_repositories     = [{
-    name = "terraform-aws-gitlab-oidc",
-    branches = ["main", "pr-*", "*pull*", "*"]
-  }]
+  gitlab_repositories     = [
+  {
+      name     = "terraform-aws-gitlab-oidc",
+      refs     = ["main", "pr-*", "*pull*", "*"]
+      ref_type = "branch"
+    },
+    {
+      name     = "terraform-aws-gitlab-oidc",
+      refs     = ["*"]
+      ref_type = "tag"
+    }
+]
   tags                    = var.tags
 }
 ```
