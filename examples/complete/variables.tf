@@ -1,9 +1,3 @@
-variable "region" {
-  default     = "eu-west-1"
-  description = "AWS Region name"
-  type        = string
-}
-
 variable "attach_admin_policy" {
   default     = false
   description = "Enable attachment of the AdministratorAccess policy"
@@ -31,13 +25,17 @@ variable "enabled" {
 variable "force_detach_policies" {
   default     = false
   description = "Force detachment of policies attached to the IAM role"
-  type        = string
+  type        = bool
 }
 
 variable "gitlab_organisation" {
-  default     = "saidsef"
   description = "GitLab organisation name"
   type        = string
+
+  validation {
+    condition     = length(var.gitlab_organisation) > 0
+    error_message = "GitLab organisation name must not be empty."
+  }
 }
 
 variable "gitlab_repositories" {
@@ -53,14 +51,23 @@ variable "gitlab_repositories" {
       ref_type = ""
     }
   ]
-
   description = "List of GitLab repository name(s) and refs names or patterns"
+
+  validation {
+    condition     = alltrue([for repo in var.gitlab_repositories : length(repo.name) > 0])
+    error_message = "Each GitLab repository must have a non-empty name."
+  }
 }
 
 variable "iam_role_name" {
   default     = "gitlab-runner"
   description = "Name of the IAM role"
   type        = string
+
+  validation {
+    condition     = length(var.iam_role_name) > 0
+    error_message = "IAM role name must not be empty."
+  }
 }
 
 variable "iam_role_path" {
@@ -68,6 +75,11 @@ variable "iam_role_path" {
   description = "Path to the IAM role"
   type        = string
   sensitive   = false
+
+  validation {
+    condition     = length(var.iam_role_path) > 0
+    error_message = "IAM role path must not be empty."
+  }
 }
 
 variable "iam_role_permissions_boundary" {
@@ -101,11 +113,22 @@ variable "url" {
   description = "URL of identity provider"
   default     = "gitlab.com"
   sensitive   = false
+
+  validation {
+    condition     = can(regex("^https?://", var.url))
+    error_message = "URL must be a valid HTTP or HTTPS URL."
+  }
+}
+
+variable "region" {
+  default     = "eu-west-1"
+  description = "AWS Region name."
+  type        = string
 }
 
 variable "tags" {
   default     = {}
-  description = "Map of tags to be applied to all resources"
+  description = "Map of tags to be applied to all resources."
   type        = map(string)
   sensitive   = false
 }

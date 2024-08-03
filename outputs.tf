@@ -1,23 +1,23 @@
 output "role_id" {
   value       = aws_iam_role.role[0].id
   sensitive   = false
-  description = "AWS IAM role ID"
+  description = "The ID of the AWS IAM role."
 }
 
 output "role_arn" {
   value       = aws_iam_role.role[0].arn
   sensitive   = false
-  description = "AWS IAM role ARN"
+  description = "The ARN of the AWS IAM role."
 }
 
 output "repositories" {
   value       = local.repositories_refs
   sensitive   = false
-  description = "List of GitLab repositories and refs"
+  description = "A list of GitLab repositories and their references."
 }
 
 output "thumbprint" {
   value       = [for fingerprint in data.tls_certificate.provider.certificates : fingerprint.sha1_fingerprint]
   sensitive   = false
-  description = "GitLab certificates thumbprints"
+  description = "Thumbprints of GitLab certificates."
 }
