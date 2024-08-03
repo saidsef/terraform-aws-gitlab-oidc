@@ -14,13 +14,16 @@ stages:
  - aws-test
 
 .assume-role:
+  id_tokens:
+    AWS_ID_TOKEN:
+      aud: https://oidc.provider.com
   before_script:
     - >
       STS=($(aws sts assume-role-with-web-identity
       --role-arn $ROLE_ARN
       --region $AWS_REGION
       --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
-      --web-identity-token $CI_JOB_JWT_V2
+      --web-identity-token $AWS_ID_TOKEN
       --duration-seconds 3600
       --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
       --output text))
@@ -32,7 +35,7 @@ validate:
   stage: validate
   needs: []
   image:
-    name: hashicorp/terraform:1.1.9
+    name: hashicorp/terraform:latest
     entrypoint:
       - "/usr/bin/env"
       - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"

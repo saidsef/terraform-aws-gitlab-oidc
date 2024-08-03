@@ -48,7 +48,15 @@ Please see [TERRAFORM.md](./TERRAFORM.md)
 
 Retrieve temporary credentials via [GitLab Runner](https://github.com/saidsef/terraform-aws-gitlab-oidc/blob/a9f7cf02fd5789b41f2aca5978c752b8fc843977/.gitlab-ci.yml#L16-L28)
 
-https://github.com/saidsef/terraform-aws-gitlab-oidc/blob/a9f7cf02fd5789b41f2aca5978c752b8fc843977/.gitlab-ci.yml#L16-L28
+## JWT
+
+<https://github.com/saidsef/terraform-aws-gitlab-oidc/blob/a9f7cf02fd5789b41f2aca5978c752b8fc843977/.gitlab-ci.yml#L16-L28>
+
+> `CI_JOB_JWT` and `CI_JOB_JWT_V2` were [deprecated in GitLab 15.9](https://docs.gitlab.com/ee/update/deprecations.html#old-versions-of-json-web-tokens-are-deprecated) and are scheduled to be removed in GitLab 17.0. Use [ID tokens](https://docs.gitlab.com/ee/ci/yaml/index.html#id_tokens) instead.
+
+## ID Tokens
+
+<https://github.com/saidsef/terraform-aws-gitlab-oidc/blob/3546911a7b0563e95ed9502a5f63ab52efcfee63/.gitlab-ci.yml#L16-L32>
 
 ## Source
 

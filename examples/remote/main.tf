@@ -14,7 +14,9 @@ module "gitlab_oidc" {
   gitlab_organisation     = "saidsef"
   gitlab_repositories = [{
     name     = "terraform-aws-gitlab-oidc",
-    branches = ["main", "pr-*", "*pull*", "*"]
+    refs     = ["main", "pr-*", "*pull*", "*"]
+    ref_type = "branch"
+
   }]
   iam_role_name                 = "gitlab-runner"
   iam_role_path                 = "/"
