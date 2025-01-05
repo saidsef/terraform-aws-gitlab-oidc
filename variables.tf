@@ -115,8 +115,8 @@ variable "url" {
   sensitive   = false
 
   validation {
-    condition     = can(regex("^https?://", var.url))
-    error_message = "URL must be a valid HTTP or HTTPS URL."
+    condition     = length(var.url) > 0 && !startswith(var.url, "http://") && !startswith(var.url, "https://")
+    error_message = "URL must not start with 'http://' or 'https://' and cannot be empty."
   }
 }
 
