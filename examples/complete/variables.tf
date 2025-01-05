@@ -113,11 +113,6 @@ variable "url" {
   description = "URL of identity provider"
   default     = "gitlab.com"
   sensitive   = false
-
-  validation {
-    condition     = can(regex("^https?://", var.url))
-    error_message = "URL must be a valid HTTP or HTTPS URL."
-  }
 }
 
 variable "region" {
