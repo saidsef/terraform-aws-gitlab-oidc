@@ -16,6 +16,12 @@ jobs:
       start-version: '0'
       end-version: '8'
 
+  opentofu:
+    uses: saidsef/saidsef/.github/workflows/tofu-validate.yaml@main
+    with:
+      start-version: '6'
+      end-version: '8'
+
   tfsec:
     uses: saidsef/saidsef/.github/workflows/tf-security.yaml@main
     needs: [validate]
