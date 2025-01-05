@@ -10,15 +10,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  validate:
+  terraform:
     uses: saidsef/saidsef/.github/workflows/tf-validate.yaml@main
     with:
-      start-version: '0'
-      end-version: '8'
+      start-version: '0' # minimum TF version (format 1.0.x)
+      end-version: '10' # maximum TF version (format 1.10.x)
+
+  opentofu:
+    uses: saidsef/saidsef/.github/workflows/tofu-validate.yaml@main
+    with:
+      start-version: '6' # minimum TOFU version (format 1.6.x)
+      end-version: '8' # maximum TOFU version (format 1.8.x)
 
   tfsec:
     uses: saidsef/saidsef/.github/workflows/tf-security.yaml@main
-    needs: [validate]
+    needs: [terraform, opentofu]
 
   attest:
     uses: saidsef/saidsef/.github/workflows/tf-attest.yaml@main
@@ -28,7 +34,7 @@ jobs:
     if: contains(github.event_name, 'pull_request')
     runs-on: ubuntu-latest
     name: Return the IAM user
-    needs: [validate, tfsec]
+    needs: [terraform, opentofu, tfsec]
     permissions:
       contents: read
       id-token: write
@@ -44,4 +50,4 @@ jobs:
 
   auto-approve:
     uses: saidsef/saidsef/.github/workflows/auto-approve.yaml@main
-    needs: [validate, tfsec, caller-identity-check]
+    needs: [terraform, opentofu, tfsec, caller-identity-check]

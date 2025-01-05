@@ -24,7 +24,7 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_region"></a> [region](#input\_region) | AWS Region name | `string` | `"eu-west-1"` | no |
+| <a name="input_region"></a> [region](#input\_region) | AWS Region name. | `string` | `"eu-west-1"` | no |
 
 ## Outputs
 

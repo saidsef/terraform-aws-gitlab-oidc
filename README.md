@@ -1,5 +1,6 @@
 # Terraform AWS GitLab OIDC Provider
 [![CI](https://github.com/saidsef/terraform-aws-gitlab-oidc/actions/workflows/ci.yaml/badge.svg)](#deployment--usage) ![GitHub issues](https://img.shields.io/github/issues-raw/saidsef/terraform-aws-gitlab-oidc) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE.md)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsaidsef%2Fterraform-aws-gitlab-oidc.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsaidsef%2Fterraform-aws-gitlab-oidc?ref=badge_shield)
 
 This Terraform module enables you to configure GitLab Runners as an AWS IAM OIDC identity provider in AWS, which enables GitLab Runners to access resources within an AWS account(s) without requiring long-lived credentials to be stored as GitLab secrets.
 
@@ -67,3 +68,5 @@ Our latest and greatest source of `terraform-aws-gitlab-oidc` can be found on [G
 We would :heart: you to contribute by making a [pull request](https://github.com/saidsef/terraform-aws-gitlab-oidc/pulls).
 
 Please read the official [Contribution Guide](./CONTRIBUTING.md) for more information on how you can contribute.
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsaidsef%2Fterraform-aws-gitlab-oidc.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsaidsef%2Fterraform-aws-gitlab-oidc?ref=badge_large)

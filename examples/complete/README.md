@@ -30,7 +30,7 @@ No resources.
 | <a name="input_enabled"></a> [enabled](#input\_enabled) | Enable creation of resources | `bool` | `true` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Force detachment of policies attached to the IAM role | `bool` | `false` | no |
 | <a name="input_gitlab_organisation"></a> [gitlab\_organisation](#input\_gitlab\_organisation) | GitLab organisation name | `string` | n/a | yes |
-| <a name="input_gitlab_repositories"></a> [gitlab\_repositories](#input\_gitlab\_repositories) | List of GitLab repository name(s) and refs names or patterns | <pre>list(object({<br>    name     = string<br>    refs     = list(string)<br>    ref_type = string<br>  }))</pre> | <pre>[<br>  {<br>    "name": "",<br>    "ref_type": "",<br>    "refs": []<br>  }<br>]</pre> | no |
+| <a name="input_gitlab_repositories"></a> [gitlab\_repositories](#input\_gitlab\_repositories) | List of GitLab repository name(s) and refs names or patterns | <pre>list(object({<br/>    name     = string<br/>    refs     = list(string)<br/>    ref_type = string<br/>  }))</pre> | <pre>[<br/>  {<br/>    "name": "",<br/>    "ref_type": "",<br/>    "refs": []<br/>  }<br/>]</pre> | no |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name) | Name of the IAM role | `string` | `"gitlab-runner"` | no |
 | <a name="input_iam_role_path"></a> [iam\_role\_path](#input\_iam\_role\_path) | Path to the IAM role | `string` | `"/"` | no |
 | <a name="input_iam_role_permissions_boundary"></a> [iam\_role\_permissions\_boundary](#input\_iam\_role\_permissions\_boundary) | ARN of the permissions boundary to be used by the IAM role | `string` | `""` | no |
