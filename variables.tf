@@ -113,11 +113,6 @@ variable "url" {
   description = "Identity provider URL"
   default     = "gitlab.com"
   sensitive   = false
-
-  validation {
-    condition     = length(var.url) > 0 && !startswith(var.url, "http://") && !startswith(var.url, "https://")
-    error_message = "URL must not start with 'http://' or 'https://' and cannot be empty."
-  }
 }
 
 variable "tags" {
