@@ -1,9 +1,9 @@
 locals {
-  oidc_provider = tobool(var.create_oidc_provider) ? aws_iam_openid_connect_provider.provider[0] : data.aws_iam_openid_connect_provider.provider[0]
+  oidc_provider = var.create_oidc_provider ? aws_iam_openid_connect_provider.provider[0] : data.aws_iam_openid_connect_provider.provider[0]
 }
 
 resource "aws_iam_role" "role" {
-  count = tobool(var.enabled) ? 1 : 0
+  count = var.enabled ? 1 : 0
 
   assume_role_policy    = data.aws_iam_policy_document.assume_role.json
   description           = format("Role used by the %s GitLab Organisation.", var.gitlab_organisation)
@@ -16,28 +16,28 @@ resource "aws_iam_role" "role" {
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
-  count = tobool(var.enabled) && tobool(var.attach_admin_policy) ? 1 : 0
+  count = var.enabled && var.attach_admin_policy ? 1 : 0
 
   policy_arn = format("arn:%s:iam::aws:policy/AdministratorAccess", data.aws_partition.current.partition)
   role       = aws_iam_role.role[0].id
 }
 
 resource "aws_iam_role_policy_attachment" "read_only" {
-  count = tobool(var.enabled) && tobool(var.attach_read_only_policy) ? 1 : 0
+  count = var.enabled && var.attach_read_only_policy ? 1 : 0
 
   policy_arn = format("arn:%s:iam::aws:policy/ReadOnlyAccess", data.aws_partition.current.partition)
   role       = aws_iam_role.role[0].id
 }
 
 resource "aws_iam_role_policy_attachment" "custom" {
-  count = tobool(var.enabled) ? length(var.iam_role_policy_arns) : 0
+  count = var.enabled ? length(var.iam_role_policy_arns) : 0
 
   policy_arn = var.iam_role_policy_arns[count.index]
   role       = aws_iam_role.role[0].id
 }
 
 resource "aws_iam_openid_connect_provider" "provider" {
-  count          = tobool(var.enabled) && tobool(var.create_oidc_provider) ? 1 : 0
+  count          = var.enabled && var.create_oidc_provider ? 1 : 0
   client_id_list = [format("https://%s", var.url)]
 
   tags            = var.tags
